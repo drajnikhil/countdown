@@ -188,14 +188,14 @@ gateForm.addEventListener("submit", function(event) {
    Replace the text inside quotes.
    Keep empty slots as "" until you add photos.
    ========================================== */
-const photoLinks = [
-  "https://drive.google.com/file/d/1ARi3wwohSHkx-i2-R8dqVpG7I-UM7ANu/view?usp=drive_link", // PHOTO 1
-  "https://drive.google.com/file/d/1csIbi_zyfujJaURAhTHHTBoCZCmb3_Wp/view?usp=drive_link", // PHOTO 2 — paste link here
-  "https://drive.google.com/file/d/1IpV7UynTrz2SqUpP4-ugtLDm3Oo8Z6QQ/view?usp=drive_link", // PHOTO 3 — paste link here
-  "https://drive.google.com/file/d/1NomxnaZnDTW-HN_LkrlP6Sfs1GyYmOco/view?usp=drive_link", // PHOTO 4 — paste link here
-  "https://drive.google.com/file/d/1t_PBMNdwba5s0tH2EUXJGo57FtYIAWQ-/view?usp=drive_link"  // PHOTO 5 — paste link here
-];
 
+const photoLinks = [
+  "https://drive.google.com/uc?export=view&id=1ARi3wwohSHkx-i2-R8dqVpG7I-UM7ANu",
+  "https://drive.google.com/uc?export=view&id=1csIbi_zyfujJaURAhTHHTBoCZCmb3_Wp",
+  "https://drive.google.com/uc?export=view&id=1IpV7UynTrz2SqUpP4-ugtLDm3Oo8Z6QQ",
+  "https://drive.google.com/uc?export=view&id=1NomxnaZnDTW-HN_LkrlP6Sfs1GyYmOco",
+  "https://drive.google.com/uc?export=view&id=1t_PBMNdwba5s0tH2EUXJGo57FtYIAWQ-"
+];
 /* Load photos automatically */
 function loadGallery() {
   const cards = document.querySelectorAll("#photoGallery .photo");
