@@ -9,446 +9,115 @@
 
 <style>
 :root {
-  --bg: #1b1233;
-  --purple: #352052;
-  --gold: #f4cf77;
-  --gold-light: #ffe9a9;
-  --text: #fff9ef;
-  --muted: #d5c9e6;
-  --line: #f4cf7740;
+  --bg:#1b1233;
+  --gold:#f4cf77;
+  --gold-light:#ffe9a9;
+  --text:#fff9ef;
+  --muted:#d5c9e6;
+  --line:#f4cf7740;
 }
-
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  background:
-    radial-gradient(ellipse at 15% 10%, #493065 0%, transparent 42%),
-    radial-gradient(ellipse at 90% 35%, #34204b 0%, transparent 40%),
-    var(--bg);
-  overflow-x: hidden;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:radial-gradient(ellipse at 15% 10%,#493065 0%,transparent 42%),
+    radial-gradient(ellipse at 90% 35%,#34204b 0%,transparent 40%),var(--bg);
+  overflow-x:hidden;
 }
+.sparkle{position:fixed;z-index:0;pointer-events:none;color:var(--gold);opacity:.4;
+  animation:twinkle 4s ease-in-out infinite alternate}
+.one{top:15%;left:8%;font-size:18px}
+.two{top:28%;right:9%;font-size:13px;animation-delay:1s}
+.three{top:70%;left:5%;font-size:12px;animation-delay:2s}
+.four{top:78%;right:7%;font-size:20px;animation-delay:.7s}
+@keyframes twinkle{from{opacity:.18}to{opacity:.65}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-/* Lightweight decorative sparkles */
-.sparkle {
-  position: fixed;
-  z-index: 0;
-  pointer-events: none;
-  color: var(--gold);
-  opacity: .45;
-  animation: twinkle 4s ease-in-out infinite alternate;
+body:not(.unlocked) .wrap{display:none}
+#passwordGate[hidden]{display:none!important}
+#passwordGate{min-height:100vh;min-height:100dvh;display:flex;align-items:center;
+  justify-content:center;padding:22px;position:relative;z-index:2}
+.gate-card{width:min(100%,410px);padding:34px 25px;text-align:center;background:#26183f;
+  border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 55px #09051450}
+.gate-symbol{font-size:35px;color:var(--gold)}
+.gate-eyebrow{color:var(--gold);letter-spacing:.18em;font-size:.7rem;text-transform:uppercase;margin-top:12px}
+.gate-card h1{font:400 clamp(2rem,8vw,2.8rem) Georgia,serif;line-height:1.15;color:var(--gold-light);margin:17px 0}
+.gate-card p{color:var(--muted);line-height:1.75;font-size:.92rem}
+#gatePassword{width:100%;padding:14px;margin:12px 0;border:1px solid #bda3df70;
+  border-radius:12px;background:#170f2a;color:white;font-size:16px}
+#gatePassword:focus{outline:2px solid var(--gold);outline-offset:2px}
+.gate-button{width:100%;padding:14px;border:0;border-radius:999px;background:var(--gold);
+  color:#28183c;font-size:.95rem;font-weight:750;cursor:pointer}
+.gate-button:hover{background:var(--gold-light)}
+#gateError{min-height:1.4em;color:#ffbdcf;font-size:.84rem}
+.gate-foot{color:#b9a7d0;margin-top:15px;font-size:.7rem;letter-spacing:.12em}
+
+.wrap{position:relative;z-index:1;width:min(1080px,92%);margin:auto;padding:28px 0 60px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:52px}
+.brand{color:var(--gold);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase}
+.pill{border:1px solid var(--line);border-radius:999px;padding:9px 13px;color:var(--muted);font-size:.75rem}
+.hero{text-align:center;max-width:800px;margin:auto}
+.eyebrow{color:var(--gold);font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.hero h1{font:400 clamp(2.7rem,8vw,5.6rem)/1.08 Georgia,serif;letter-spacing:-.035em;margin:19px 0;color:var(--gold-light)}
+.hero p{max-width:590px;margin:auto;color:var(--muted);font-size:1rem;line-height:1.85}
+.timer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:740px;margin:35px auto 20px}
+.unit{padding:24px 6px 19px;border:1px solid var(--line);border-radius:17px;background:#ffffff08}
+.num{color:var(--gold-light);font-size:clamp(2rem,6vw,4rem);font-weight:650;line-height:1.1;font-variant-numeric:tabular-nums}
+.label{color:var(--muted);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;margin-top:12px}
+.date-line{color:var(--muted);font-size:.85rem}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:26px 0 65px}
+.btn{display:inline-block;padding:12px 17px;border:1px solid var(--line);border-radius:999px;
+  background:#ffffff08;color:var(--text);text-decoration:none;font-size:.86rem;cursor:pointer}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:#28183c;font-weight:700}
+.btn:hover{border-color:var(--gold)}
+.section-head{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:14px;margin-bottom:20px}
+.section-head h2{color:var(--gold-light);font:400 clamp(1.8rem,4vw,2.8rem) Georgia,serif;margin:8px 0 0}
+.section-head p{color:var(--muted);font-size:.82rem}
+.gallery{display:grid;grid-template-columns:1.15fr .85fr .85fr;grid-auto-rows:220px;gap:12px}
+.photo{position:relative;min-height:160px;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#302044}
+.photo:first-child{grid-row:span 2}
+.photo img{width:100%;height:100%;display:block;object-fit:cover}
+.placeholder{height:100%;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px}
+.symbol{color:var(--gold);font-size:2rem;margin-bottom:10px}
+.placeholder span{color:var(--muted);font-size:.78rem;margin-top:7px}
+.caption{position:absolute;left:10px;right:10px;bottom:10px;padding:9px 11px;border-radius:9px;
+  background:#160d2ddd;color:white;font-size:.78rem;pointer-events:none}
+.note{max-width:700px;margin:43px auto 0;padding-top:30px;border-top:1px solid var(--line);
+  color:var(--muted);line-height:1.9;text-align:center}
+.note strong{color:var(--gold-light);font:400 clamp(1.15rem,4vw,1.5rem) Georgia,serif}
+.footer{margin-top:38px;color:#b9a7d0;text-align:center;font-size:.68rem;letter-spacing:.1em}
+@media(max-width:700px){
+  .top{margin-bottom:40px}.timer{gap:7px}.unit{padding:19px 3px 15px;border-radius:13px}
+  .label{font-size:.53rem;letter-spacing:.06em}
+  .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:170px}
+  .photo:first-child{grid-column:span 2;grid-row:span 1}
 }
-
-.sparkle.one { top: 15%; left: 8%; font-size: 18px; }
-.sparkle.two { top: 28%; right: 9%; font-size: 13px; animation-delay: 1s; }
-.sparkle.three { top: 70%; left: 5%; font-size: 12px; animation-delay: 2s; }
-.sparkle.four { top: 78%; right: 7%; font-size: 20px; animation-delay: .7s; }
-
-@keyframes twinkle {
-  from { opacity: .18; }
-  to { opacity: .65; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Password screen */
-body:not(.unlocked) .wrap { display: none; }
-#passwordGate[hidden] { display: none !important; }
-
-#passwordGate {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 22px;
-  position: relative;
-  z-index: 2;
-}
-
-.gate-card {
-  width: min(100%, 410px);
-  padding: 34px 25px;
-  text-align: center;
-  background: #26183f;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  box-shadow: 0 18px 55px #09051450;
-}
-
-.gate-symbol {
-  font-size: 35px;
-  color: var(--gold);
-}
-
-.gate-eyebrow {
-  color: var(--gold);
-  letter-spacing: .18em;
-  font-size: .7rem;
-  text-transform: uppercase;
-  margin-top: 12px;
-}
-
-.gate-card h1 {
-  font: 400 clamp(2rem, 8vw, 2.8rem) Georgia, serif;
-  line-height: 1.15;
-  color: var(--gold-light);
-  margin: 17px 0;
-}
-
-.gate-card p {
-  color: var(--muted);
-  line-height: 1.75;
-  font-size: .92rem;
-}
-
-#gatePassword {
-  width: 100%;
-  padding: 14px;
-  margin: 12px 0;
-  border: 1px solid #bda3df70;
-  border-radius: 12px;
-  background: #170f2a;
-  color: white;
-  font-size: 16px;
-}
-
-#gatePassword:focus {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
-}
-
-.gate-button {
-  width: 100%;
-  padding: 14px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--gold);
-  color: #28183c;
-  font-size: .95rem;
-  font-weight: 750;
-  cursor: pointer;
-}
-
-.gate-button:hover { background: var(--gold-light); }
-
-#gateError {
-  min-height: 1.4em;
-  color: #ffbdcf;
-  font-size: .84rem;
-}
-
-.gate-foot {
-  color: #b9a7d0;
-  margin-top: 15px;
-  font-size: .7rem;
-  letter-spacing: .12em;
-}
-
-/* Main website */
-.wrap {
-  position: relative;
-  z-index: 1;
-  width: min(1080px, 92%);
-  margin: auto;
-  padding: 28px 0 60px;
-}
-
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 52px;
-}
-
-.brand {
-  color: var(--gold);
-  font-size: .72rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-}
-
-.pill {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 9px 13px;
-  color: var(--muted);
-  font-size: .75rem;
-}
-
-.hero {
-  text-align: center;
-  max-width: 800px;
-  margin: auto;
-}
-
-.eyebrow {
-  color: var(--gold);
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-}
-
-.hero h1 {
-  font: 400 clamp(2.7rem, 8vw, 5.6rem)/1.08 Georgia, serif;
-  letter-spacing: -.035em;
-  margin: 19px 0;
-  color: var(--gold-light);
-}
-
-.hero p {
-  max-width: 590px;
-  margin: auto;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.85;
-}
-
-.timer {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  max-width: 740px;
-  margin: 35px auto 20px;
-}
-
-.unit {
-  padding: 24px 6px 19px;
-  border: 1px solid var(--line);
-  border-radius: 17px;
-  background: #ffffff08;
-}
-
-.num {
-  color: var(--gold-light);
-  font-size: clamp(2rem, 6vw, 4rem);
-  font-weight: 650;
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
-}
-
-.label {
-  color: var(--muted);
-  font-size: .62rem;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  margin-top: 12px;
-}
-
-.date-line {
-  color: var(--muted);
-  font-size: .85rem;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin: 26px 0 65px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 12px 17px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: #ffffff08;
-  color: var(--text);
-  text-decoration: none;
-  font-size: .86rem;
-  cursor: pointer;
-}
-
-.btn.primary {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: #28183c;
-  font-weight: 700;
-}
-
-.btn:hover { border-color: var(--gold); }
-
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.section-head h2 {
-  color: var(--gold-light);
-  font: 400 clamp(1.8rem, 4vw, 2.8rem) Georgia, serif;
-  margin: 8px 0 0;
-}
-
-.section-head p {
-  color: var(--muted);
-  font-size: .82rem;
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: 1.15fr .85fr .85fr;
-  grid-auto-rows: 220px;
-  gap: 12px;
-}
-
-.photo {
-  position: relative;
-  min-height: 160px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: #302044;
-}
-
-.photo:first-child { grid-row: span 2; }
-
-.photo img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.placeholder {
-  height: 100%;
-  min-height: 160px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 18px;
-}
-
-.symbol {
-  color: var(--gold);
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.placeholder span {
-  color: var(--muted);
-  font-size: .78rem;
-  margin-top: 7px;
-}
-
-.photo input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.caption {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  padding: 9px 11px;
-  border-radius: 9px;
-  background: #160d2ddd;
-  color: white;
-  font-size: .78rem;
-  pointer-events: none;
-}
-
-.note {
-  max-width: 700px;
-  margin: 43px auto 0;
-  padding-top: 30px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  line-height: 1.9;
-  text-align: center;
-}
-
-.note strong {
-  color: var(--gold-light);
-  font: 400 clamp(1.15rem, 4vw, 1.5rem) Georgia, serif;
-}
-
-.footer {
-  margin-top: 38px;
-  color: #b9a7d0;
-  text-align: center;
-  font-size: .68rem;
-  letter-spacing: .1em;
-}
-
-@media (max-width: 700px) {
-  .top { margin-bottom: 40px; }
-  .timer { gap: 7px; }
-  .unit { padding: 19px 3px 15px; border-radius: 13px; }
-  .label { font-size: .53rem; letter-spacing: .06em; }
-  .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 170px; }
-  .photo:first-child { grid-column: span 2; grid-row: span 1; }
-}
-
-@media (max-width: 370px) {
-  .timer { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .gallery { grid-auto-rows: 145px; }
-}
+@media(max-width:370px){.timer{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery{grid-auto-rows:145px}}
 </style>
 </head>
-
 <body>
-
 <div class="sparkle one" aria-hidden="true">✦</div>
 <div class="sparkle two" aria-hidden="true">✧</div>
 <div class="sparkle three" aria-hidden="true">✧</div>
 <div class="sparkle four" aria-hidden="true">✦</div>
 
-<!-- PASSWORD SCREEN -->
 <section id="passwordGate">
   <div class="gate-card">
     <div class="gate-symbol">✦ ♡ ✦</div>
     <div class="gate-eyebrow">A little secret, just for you</div>
     <h1>Our own little universe</h1>
-    <p>
-      Among all the stars in the sky,<br>
-      this little place is just for us.<br>
-      Enter our secret password, my love ✨
-    </p>
-
+    <p>Among all the stars in the sky,<br>this little place is just for us.<br>Enter our secret password, my love ✨</p>
     <form id="gateForm">
-      <input id="gatePassword"
-        type="password"
-        placeholder="Our secret password"
-        aria-label="Password"
-        autocomplete="current-password"
-        required>
-      <button class="gate-button" type="submit">
-        Open our little world ♡
-      </button>
+      <input id="gatePassword" type="password" placeholder="Our secret password"
+        aria-label="Password" autocomplete="current-password" required>
+      <button class="gate-button" type="submit">Open our little world ♡</button>
       <p id="gateError" role="status"></p>
     </form>
-
     <div class="gate-foot">SEALED WITH LOVE · JUST US</div>
   </div>
 </section>
 
-<!-- COUNTDOWN WEBSITE -->
 <main class="wrap">
   <header class="top">
     <div class="brand">✦ A little place in time</div>
@@ -458,20 +127,14 @@ body:not(.unlocked) .wrap { display: none; }
   <section class="hero">
     <div class="eyebrow">Every day brings us closer</div>
     <h1 id="headline">Until our day <span>✦</span></h1>
-    <p id="subtitle">
-      Some things are worth counting down to. Here's to the memories
-      we've made, the moments still ahead, and everything in between.
-    </p>
-
+    <p id="subtitle">Some things are worth counting down to. Here's to the memories we've made, the moments still ahead, and everything in between.</p>
     <div class="timer" aria-label="Countdown timer">
       <div class="unit"><div class="num" id="days">000</div><div class="label">Days</div></div>
       <div class="unit"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
       <div class="unit"><div class="num" id="minutes">00</div><div class="label">Minutes</div></div>
       <div class="unit"><div class="num" id="seconds">00</div><div class="label">Seconds</div></div>
     </div>
-
     <div class="date-line" id="dateLine"></div>
-
     <div class="actions">
       <button class="btn primary" id="editBtn">Personalise this page ✨</button>
       <a class="btn" href="#memories">Our little memories ↓</a>
@@ -480,39 +143,16 @@ body:not(.unlocked) .wrap { display: none; }
 
   <section id="memories">
     <div class="section-head">
-      <div>
-        <div class="eyebrow">The moments we keep</div>
-        <h2>A few favourite memories</h2>
-      </div>
-      <p>Tap any frame to add a photo</p>
+      <div><div class="eyebrow">The moments we keep</div><h2>A few favourite memories</h2></div>
+      <p>Our memories, always here ✨</p>
     </div>
 
-    <div class="gallery">
-      <div class="photo">
-        <div class="placeholder"><div class="symbol">✧</div><b>Your favourite photo</b><span>Tap to choose an image</span></div>
-        <input type="file" accept="image/*" aria-label="Add favourite photo">
-        <div class="caption">The one that says it all</div>
-      </div>
-      <div class="photo">
-        <div class="placeholder"><div class="symbol">♡</div><b>A happy little moment</b><span>Tap to choose an image</span></div>
-        <input type="file" accept="image/*" aria-label="Add a photo">
-        <div class="caption">The little things</div>
-      </div>
-      <div class="photo">
-        <div class="placeholder"><div class="symbol">☼</div><b>A day to remember</b><span>Tap to choose an image</span></div>
-        <input type="file" accept="image/*" aria-label="Add a photo">
-        <div class="caption">Somewhere together</div>
-      </div>
-      <div class="photo">
-        <div class="placeholder"><div class="symbol">☾</div><b>One for the scrapbook</b><span>Tap to choose an image</span></div>
-        <input type="file" accept="image/*" aria-label="Add a photo">
-        <div class="caption">More memories to come</div>
-      </div>
-      <div class="photo">
-        <div class="placeholder"><div class="symbol">✦</div><b>Another favourite</b><span>Tap to choose an image</span></div>
-        <input type="file" accept="image/*" aria-label="Add a photo">
-        <div class="caption">Just us being us</div>
-      </div>
+    <div class="gallery" id="photoGallery">
+      <div class="photo"><div class="placeholder"><div class="symbol">✧</div><b>Your favourite photo</b><span>Photo 1</span></div><div class="caption">The one that says it all</div></div>
+      <div class="photo"><div class="placeholder"><div class="symbol">♡</div><b>A happy little moment</b><span>Photo 2</span></div><div class="caption">The little things</div></div>
+      <div class="photo"><div class="placeholder"><div class="symbol">☼</div><b>A day to remember</b><span>Photo 3</span></div><div class="caption">Somewhere together</div></div>
+      <div class="photo"><div class="placeholder"><div class="symbol">☾</div><b>One for the scrapbook</b><span>Photo 4</span></div><div class="caption">More memories to come</div></div>
+      <div class="photo"><div class="placeholder"><div class="symbol">✦</div><b>Another favourite</b><span>Photo 5</span></div><div class="caption">Just us being us</div></div>
     </div>
   </section>
 
@@ -520,28 +160,21 @@ body:not(.unlocked) .wrap { display: none; }
     <strong>“The best part is knowing there's something beautiful ahead.”</strong>
     <br>Until then, let's make the days count. ✨
   </section>
-
-  <footer class="footer">
-    ONE DAY AT A TIME · ALL THE WAY TO OUR DAY ✦
-  </footer>
+  <footer class="footer">ONE DAY AT A TIME · ALL THE WAY TO OUR DAY ✦</footer>
 </main>
 
 <script>
-/* IMPORTANT: replace the text below with your chosen password.
-   Keep the quotation marks. Passwords are case-sensitive. */
+/* PASSWORD */
 const correctPassword = "0326";
-
-const gate = document.getElementById("passwordGate");
 const gateForm = document.getElementById("gateForm");
 const passwordInput = document.getElementById("gatePassword");
 const gateError = document.getElementById("gateError");
 
 gateForm.addEventListener("submit", function(event) {
   event.preventDefault();
-
   if (passwordInput.value === correctPassword) {
     document.body.classList.add("unlocked");
-    gate.hidden = true;
+    document.getElementById("passwordGate").hidden = true;
     gateError.textContent = "";
     document.getElementById("editBtn").focus();
   } else {
@@ -550,17 +183,53 @@ gateForm.addEventListener("submit", function(event) {
   }
 });
 
-/* Countdown to 26 November 2027 */
-let targetDate = new Date(2027, 10, 26, 0, 0, 0);
+/* ==========================================
+   FIVE PERMANENT PHOTO LINKS
+   Replace the text inside quotes.
+   Keep empty slots as "" until you add photos.
+   ========================================== */
+const photoLinks = [
+  "https://drive.google.com/file/d/1ARi3wwohSHkx-i2-R8dqVpG7I-UM7ANu/view?usp=drive_link", // PHOTO 1
+  "https://drive.google.com/file/d/1csIbi_zyfujJaURAhTHHTBoCZCmb3_Wp/view?usp=drive_link", // PHOTO 2 — paste link here
+  "https://drive.google.com/file/d/1IpV7UynTrz2SqUpP4-ugtLDm3Oo8Z6QQ/view?usp=drive_link", // PHOTO 3 — paste link here
+  "https://drive.google.com/file/d/1NomxnaZnDTW-HN_LkrlP6Sfs1GyYmOco/view?usp=drive_link", // PHOTO 4 — paste link here
+  "https://drive.google.com/file/d/1t_PBMNdwba5s0tH2EUXJGo57FtYIAWQ-/view?usp=drive_link"  // PHOTO 5 — paste link here
+];
+
+/* Load photos automatically */
+function loadGallery() {
+  const cards = document.querySelectorAll("#photoGallery .photo");
+
+  cards.forEach((card, index) => {
+    const url = photoLinks[index]?.trim();
+    if (!url) return;
+
+    const img = document.createElement("img");
+    img.alt = `Our memory ${index + 1}`;
+    img.loading = index === 0 ? "eager" : "lazy";
+
+    img.onload = () => {
+      card.querySelector(".placeholder")?.remove();
+    };
+    img.onerror = () => {
+      img.remove();
+      console.warn(`Photo ${index + 1} could not be loaded. Check its link and sharing permissions.`);
+    };
+    img.src = url;
+    card.insertBefore(img, card.firstChild);
+  });
+}
+loadGallery();
+
+/* COUNTDOWN: 26 MARCH 2027 */
+let targetDate = new Date(2027, 2, 26, 0, 0, 0);
 
 function updateCountdown() {
   const remaining = targetDate.getTime() - Date.now();
   const get = id => document.getElementById(id);
 
   if (remaining <= 0) {
-    ["days", "hours", "minutes", "seconds"].forEach(id => {
-      get(id).textContent = "00";
-    });
+    ["days", "hours", "minutes", "seconds"].forEach(id => get(id).textContent = "00");
     get("headline").textContent = "The day is here ✨";
     get("dateLine").textContent = "Today is the day.";
     return;
@@ -576,87 +245,34 @@ function updateCountdown() {
 function updateDateLabel() {
   document.getElementById("dateLine").textContent =
     "A date to look forward to · " +
-    targetDate.toLocaleDateString(undefined, {
-      day: "numeric", month: "long", year: "numeric"
-    });
+    targetDate.toLocaleDateString(undefined, {day:"numeric", month:"long", year:"numeric"});
 }
-
 updateCountdown();
 updateDateLabel();
 setInterval(updateCountdown, 1000);
 
-/* Local photo preview */
-document.querySelectorAll(".photo input").forEach(input => {
-  input.addEventListener("change", event => {
-    const file = event.target.files && event.target.files[0];
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      alert("Please choose an image file.");
-      return;
-    }
-
-    const card = input.closest(".photo");
-    const previous = card.querySelector("img");
-
-    if (previous) {
-      if (previous.dataset.objectUrl) URL.revokeObjectURL(previous.src);
-      previous.remove();
-    }
-
-    const image = document.createElement("img");
-    image.alt = "A favourite memory";
-    image.src = URL.createObjectURL(file);
-    image.dataset.objectUrl = "true";
-
-    card.insertBefore(image, card.firstChild);
-    card.querySelector(".placeholder")?.remove();
-  });
-});
-
-/* Personalise the page */
+/* PERSONALISE */
 document.getElementById("editBtn").addEventListener("click", () => {
-  const headline = prompt(
-    "What should the headline say?",
-    document.getElementById("headline").textContent.trim()
-  );
+  const headline = prompt("What should the headline say?", document.getElementById("headline").textContent.trim());
+  if (headline !== null && headline.trim()) document.getElementById("headline").textContent = headline;
 
-  if (headline !== null && headline.trim()) {
-    document.getElementById("headline").textContent = headline;
-  }
-
-  const currentDate =
-    targetDate.getFullYear() + "-" +
-    String(targetDate.getMonth() + 1).padStart(2, "0") + "-" +
-    String(targetDate.getDate()).padStart(2, "0");
-
+  const currentDate = targetDate.getFullYear() + "-" +
+    String(targetDate.getMonth()+1).padStart(2,"0") + "-" +
+    String(targetDate.getDate()).padStart(2,"0");
   const date = prompt("Countdown target date (YYYY-MM-DD):", currentDate);
 
   if (date && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
     const [year, month, day] = date.split("-").map(Number);
-    const candidate = new Date(year, month - 1, day);
-
-    if (
-      candidate.getFullYear() === year &&
-      candidate.getMonth() === month - 1 &&
-      candidate.getDate() === day
-    ) {
+    const candidate = new Date(year, month-1, day);
+    if (candidate.getFullYear() === year && candidate.getMonth() === month-1 && candidate.getDate() === day) {
       targetDate = candidate;
       updateDateLabel();
       updateCountdown();
-    } else {
-      alert("Please enter a valid date.");
-    }
+    } else alert("Please enter a valid date.");
   }
 
-  const subtitle = prompt(
-    "Add a personal note:",
-    document.getElementById("subtitle").textContent.trim()
-  );
-
-  if (subtitle !== null) {
-    document.getElementById("subtitle").textContent = subtitle;
-  }
+  const subtitle = prompt("Add a personal note:", document.getElementById("subtitle").textContent.trim());
+  if (subtitle !== null) document.getElementById("subtitle").textContent = subtitle;
 });
 </script>
 </body>
